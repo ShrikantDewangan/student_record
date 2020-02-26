@@ -5,6 +5,12 @@
  */
 package student_record;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Sarika
@@ -159,27 +165,26 @@ public class AddStudent extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String a = jTextField1.getText();
+        String b  = jTextField2.getText();
+        String c = jTextField3.getText();
+        String d  = jTextField4.getText();
+        String e = jTextField5.getText();
+        String f  = jTextField6.getText();
+        String q1 = "insert into s_record(Fname,Lname,Roll_no,Email,Mobile_no,Course) values('"+a+"','"+b+"','"+c+"','"+d+"','"+e+"','"+f+"')";
           try{
-            conn c1 = new conn();
-            String a = jTextField1.getText();
-            String b  = jTextField2.getText();
-            String c = jTextField3.getText();
-            String d  = jTextField4.getText();
-            String e = jTextField5.getText();
-            String f  = jTextField6.getText();
-            String q  = "select * from student insert into s_record";
-            ResultSet rs = (ResultSet)c1.s.executeQuery(q);
-            if(rs.next())
-            {
+            conn c1=new conn();
+            int rs = c1.s.executeUpdate(q1);
+         
+             if(rs==1){
+                JOptionPane.showMessageDialog(null, "student added !!");
+                setVisible(false);
                 new Option().setVisible(true);
                 this.setVisible(false);
-                
-                
+             }
             }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            System.out.println("error: "+e);
+        catch(Exception ex){
+             ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
